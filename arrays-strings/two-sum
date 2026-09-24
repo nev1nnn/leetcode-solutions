@@ -1,0 +1,79 @@
+//python
+class Solution(object):
+    def twoSum(self, nums, target):
+        """
+        :type nums: List[int]
+        :type target: int
+        :rtype: List[int]
+        """
+
+        seen = {}
+
+        for i in range(len(nums)):
+            complement = target - nums[i]
+
+            if complement in seen:
+                return [seen[complement], i]
+
+            seen[nums[i]] = i     
+
+//C
+/**
+ * Note: The returned array must be malloced, assume caller calls free().
+ */
+int* twoSum(int* nums, int numsSize, int target, int* returnSize) {
+    int* result = malloc(2 * sizeof(int));
+
+    for (int i = 0; i < numsSize; i++) {
+        for (int j = i + 1; j < numsSize; j++) {
+            if (nums[i] + nums[j] == target) {
+                result[0] = i;
+                result[1] = j;
+                *returnSize = 2;
+                return result;
+            }
+        }
+    }
+
+    *returnSize = 0;
+    return result;
+}
+
+//C++
+class Solution {
+public:
+    vector<int> twoSum(vector<int>& nums, int target) {
+        unordered_map<int, int> seen;
+
+        for (int i = 0; i < nums.size(); i++) {
+            int complement = target - nums[i];
+
+            if (seen.find(complement) != seen.end()) {
+                return {seen[complement], i};
+            }
+
+            seen[nums[i]] = i;
+        }
+
+        return {};
+    }
+};
+
+//Java
+class Solution {
+    public int[] twoSum(int[] nums, int target) {
+        HashMap<Integer, Integer> seen = new HashMap<>();
+
+        for (int i = 0; i < nums.length; i++) {
+            int complement = target - nums[i];
+
+            if (seen.containsKey(complement)) {
+                return new int[] {seen.get(complement), i};
+            }
+
+            seen.put(nums[i], i);
+        }
+
+        return new int[] {};
+    }
+}

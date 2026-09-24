@@ -1,0 +1,91 @@
+#Python
+class Solution(object):
+    def isAnagram(self, s, t):
+        """
+        :type s: str
+        :type t: str
+        :rtype: bool
+        """
+
+        if len(s) != len(t):
+            return False
+
+        count = [0] * 26
+
+        for i in range(len(s)):
+            count[ord(s[i]) - ord('a')] += 1
+            count[ord(t[i]) - ord('a')] -= 1
+
+        for x in count:
+            if x != 0:
+                return False
+
+        return True
+
+#C
+#include <stdbool.h>
+#include <string.h>
+
+bool isAnagram(char* s, char* t) {
+    if (strlen(s) != strlen(t))
+        return false;
+
+    int count[26] = {0};
+
+    for (int i = 0; s[i] != '\0'; i++) {
+        count[s[i] - 'a']++;
+        count[t[i] - 'a']--;
+    }
+
+    for (int i = 0; i < 26; i++) {
+        if (count[i] != 0)
+            return false;
+    }
+
+    return true;
+}
+
+#C++
+class Solution {
+public:
+    bool isAnagram(string s, string t) {
+        if (s.length() != t.length())
+            return false;
+
+        int count[26] = {0};
+
+        for (int i = 0; i < s.length(); i++) {
+            count[s[i] - 'a']++;
+            count[t[i] - 'a']--;
+        }
+
+        for (int i = 0; i < 26; i++) {
+            if (count[i] != 0)
+                return false;
+        }
+
+        return true;
+    }
+};
+
+#Java
+class Solution {
+    public boolean isAnagram(String s, String t) {
+        if (s.length() != t.length())
+            return false;
+
+        int[] count = new int[26];
+
+        for (int i = 0; i < s.length(); i++) {
+            count[s.charAt(i) - 'a']++;
+            count[t.charAt(i) - 'a']--;
+        }
+
+        for (int i = 0; i < 26; i++) {
+            if (count[i] != 0)
+                return false;
+        }
+
+        return true;
+    }
+}
